@@ -4,6 +4,13 @@ NULLABLE = {"null": True, "blank": True}  # Необязательное пол�
 
 
 class Course(models.Model):
+    owner = models.ForeignKey(
+        "users.User",
+        on_delete=models.CASCADE,
+        verbose_name="Владелец курса",
+        related_name="courses",
+        default=1
+    )
     title = models.CharField(
         max_length=255,
         verbose_name="Название курса",
@@ -28,6 +35,14 @@ class Course(models.Model):
 
 
 class Lesson(models.Model):
+    owner = models.ForeignKey(
+        "users.User",
+        on_delete=models.CASCADE,
+        verbose_name="Владелец",
+        related_name="lessons",
+        default=1
+    )
+
     title = models.CharField(
         max_length=255,
         verbose_name="Название лекции",
